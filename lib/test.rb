@@ -1,4 +1,3 @@
-# класс Тест
 class Test
   attr_reader :score
 
@@ -43,7 +42,7 @@ class Test
 
   # Строка с результатом теста
   def result_string
-    return "Тест ещё не завершён!" if !finished?
+    return "Тест ещё не завершён!" unless finished?
     @results.find{ |result| @score.between?(result[:score_lower_bound], result[:score_upper_bound]) }[:text]
   end
 end

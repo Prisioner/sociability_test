@@ -1,4 +1,3 @@
-# Класс user input/output
 class UserIO
   def output(*some_strings)
     puts

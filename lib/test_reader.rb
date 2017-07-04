@@ -1,5 +1,5 @@
-# класс TestReader
 require 'json'
+
 class TestReader
   def self.read_from_file(file_path)
     unless File.exists?(file_path)
@@ -10,12 +10,11 @@ class TestReader
     file = File.read(file_path, encoding: "utf-8")
     content = JSON.parse(file)
 
-    result = Hash.new
-    result[:questions] = content['questions']
-    result[:answers] = parse_json(content, 'answers', ['text', 'score'])
-    result[:results] = parse_json(content, 'results', ['text', 'score_lower_bound', 'score_upper_bound'])
-
-    result
+    {
+      questions: content['questions'],
+      answers: parse_json(content, 'answers', ['text', 'score']),
+      results: parse_json(content, 'results', ['text', 'score_lower_bound', 'score_upper_bound'])
+    }
   end
 
   private
