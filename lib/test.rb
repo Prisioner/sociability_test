@@ -25,7 +25,7 @@ class Test
 
   # Варианты ответа
   def answers_string
-    @answers.map.with_index{ |answer,index| "  #{index + 1} - #{answer[:text]}"}.join("\n")
+    @answers.map.with_index { |answer,index| "  #{index + 1} - #{answer[:text]}"}.join("\n")
   end
 
   # Проверяем валидность ответа. Если ответ подходит - засчитываем его
@@ -33,16 +33,16 @@ class Test
     # Проверяем на nil и строковое значение
     answer = answer.to_i
     # Проверяем валидность ответа
-    return false if !answer.between?(1, @answers.size)
+    return false unless answer.between?(1, @answers.size)
     # Засчитываем ответ и переводим тест на следующий вопрос
     @score += @answers[answer-1][:score]
     @question_index += 1
-    return true
+    # Возвращается не false и не nil, что воспринимается как "правдоподобный" результат
   end
 
   # Строка с результатом теста
   def result_string
     return "Тест ещё не завершён!" unless finished?
-    @results.find{ |result| @score.between?(result[:score_lower_bound], result[:score_upper_bound]) }[:text]
+    @results.find { |result| @score.between?(result[:score_lower_bound], result[:score_upper_bound]) }[:text]
   end
 end

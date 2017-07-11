@@ -20,14 +20,10 @@ class TestReader
   private
 
   def self.parse_json(source, section, keys)
-    result = []
-
-    source[section].each do |element|
-      result_element = Hash.new
+    source[section].map do |element|
+      result_element = {}
       keys.each { |key| result_element[key.to_sym] = element[key] }
-      result << result_element
+      element = result_element
     end
-
-    result
   end
 end

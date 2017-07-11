@@ -5,9 +5,9 @@ require_relative 'lib/test_reader'
 require_relative 'lib/test'
 require_relative 'lib/user_io'
 
-current_path = File.dirname(__FILE__)
+test_file_name = File.dirname(__FILE__) + "/data/test1.json"
 
-test_content = TestReader.read_from_file(current_path + "/data/test1.json")
+test_content = TestReader.read_from_file(test_file_name)
 
 user_io = UserIO.new
 test = Test.new(test_content)
@@ -25,6 +25,8 @@ until test.finished?
 end
 
 # Выводим результат
-user_io.output("Набрано баллов: #{test.score}",
-               "Ваш результат:",
-               test.result_string)
+user_io.output(
+  "Набрано баллов: #{test.score}",
+  "Ваш результат:",
+  test.result_string
+)
