@@ -3,8 +3,7 @@ require 'json'
 class TestReader
   def self.read_from_file(file_path)
     unless File.exists?(file_path)
-      puts "Файл с тестом не найден"
-      exit
+      raise "Файл с тестом не найден"
     end
 
     file = File.read(file_path, encoding: "utf-8")
