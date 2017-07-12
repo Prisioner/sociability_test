@@ -2,7 +2,10 @@
 # На основе http://psylist.net/praktikum/00003.htm
 
 require_relative 'lib/test_reader'
+require_relative 'lib/json_reader'
+require_relative 'lib/xml_reader'
 require_relative 'lib/test'
+require_relative 'lib/test_data'
 require_relative 'lib/user_io'
 
 test_file_name = File.dirname(__FILE__) + "/data/test1.json"
