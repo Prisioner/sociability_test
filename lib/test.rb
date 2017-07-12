@@ -26,7 +26,7 @@ class Test
   # Варианты ответа
   def answers_string
     # Все варианты ответа форматируются в вид "1 - Да" и выводятся каждый на своей строке
-    @answers.map.with_index { |answer, index| "  #{index + 1} - #{answer[:text]}"}.join("\n")
+    @answers.map.with_index { |answer, index| "  #{index + 1} - #{answer.text}"}.join("\n")
   end
 
   # Проверяем валидность ответа. Если ответ подходит - засчитываем его
@@ -38,7 +38,7 @@ class Test
     return false unless answer.between?(1, @answers.size)
     
     # Засчитываем ответ и переводим тест на следующий вопрос
-    @score += @answers[answer-1][:score]
+    @score += @answers[answer-1].score
     @question_index += 1
     # Возвращается не false и не nil, что воспринимается как "правдоподобный" результат
   end
@@ -47,12 +47,6 @@ class Test
   def result_string
     return "Тест ещё не завершён!" unless finished?
     
-    # структура элемента массива results имеет вид:
-    # {
-    #   score_lower_bound: нижняя граница результата (в баллах)
-    #   score_upper_bound: верхняя граница результата (в баллах)
-    #   text: текст результата
-    # }
-    @results.find { |result| @score.between?(result[:score_lower_bound], result[:score_upper_bound]) }[:text]
+    @results.find { |result| result.hit?(@score) }.text
   end
 end
