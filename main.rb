@@ -17,19 +17,15 @@ test_content = TestReader.read_from_file(test_file_name)
 user_io = UserIO.new
 test = Test.new(test_content)
 
-# Пока тест не завершен
 until test.finished?
-  # Выводим вопрос и варианты ответа
   user_io.output(test.question, test.answers_string)
 
-  # Считываем ответ, пока не получим подходящий
   user_choice = nil
   until test.answer_accepted?(user_choice)
     user_choice = user_io.input("\nВведите ваш вариант ответа:")
   end
 end
 
-# Выводим результат
 user_io.output(
   "Набрано баллов: #{test.score}",
   "Ваш результат:",
